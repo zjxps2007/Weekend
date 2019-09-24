@@ -12,20 +12,20 @@ public class Move : MonoBehaviour
     {
         isJumping = false;
         rb = GetComponent<Rigidbody>();
-        speed = 50;
+        speed = 10;
     }
 
-    protected void move(Vector3 velocity)
+    protected void move(Vector3 direction)
     {
-        transform.Translate(velocity * Time.deltaTime * speed);
+        transform.Translate(direction * Time.deltaTime * speed);
     }
 
-    protected void jump()
+    protected void jump(Vector3 direction)
     {
         if (isJumping == false)
         {
             isJumping = true;
-            rb.AddForce(0, 200, 0);
+            rb.AddForce(0, 20000, 0);
         }
     }
 

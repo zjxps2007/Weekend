@@ -21,19 +21,14 @@ public class Player_Move : Move
 
     private void player_move()
     {
-        Vector3 velocity = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) velocity.z += 0.1f;
-        if (Input.GetKey(KeyCode.A)) velocity.x += -0.1f;
-        if (Input.GetKey(KeyCode.S)) velocity.z += -0.1f;
-        if (Input.GetKey(KeyCode.D)) velocity.x += 0.1f;
-        move(velocity);
+        move(player_get_direction());
     }
 
     private void player_jump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            jump();
+            jump(player_get_direction());
         }
     }
 
@@ -58,5 +53,15 @@ public class Player_Move : Move
         {
             cam.Rotate(-Input.GetAxisRaw("Mouse Y"), 0, 0);
         }
+    }
+
+    private Vector3 player_get_direction()
+    {
+        Vector3 direction = Vector3.zero;
+        if (Input.GetKey(KeyCode.W)) direction.z += 1;
+        if (Input.GetKey(KeyCode.A)) direction.x += -1;
+        if (Input.GetKey(KeyCode.S)) direction.z += -1;
+        if (Input.GetKey(KeyCode.D)) direction.x += 1;
+        return direction.normalized;
     }
 }

@@ -16,12 +16,17 @@ public class Player_Move : Move
     {
         player_move();
         player_jump();
-        player_cam_move();
+        if(Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer) player_cam_move();
     }
 
     private void player_move()
     {
         move(player_get_direction());
+    }
+
+    public void player_move(Vector2 axis)
+    {
+        move(axis);
     }
 
     private void player_jump()
@@ -55,12 +60,12 @@ public class Player_Move : Move
         }
     }
 
-    private Vector3 player_get_direction()
+    private Vector2 player_get_direction()
     {
-        Vector3 direction = Vector3.zero;
-        if (Input.GetKey(KeyCode.W)) direction.z += 1;
+        Vector2 direction = Vector2.zero;
+        if (Input.GetKey(KeyCode.W)) direction.y += 1;
         if (Input.GetKey(KeyCode.A)) direction.x += -1;
-        if (Input.GetKey(KeyCode.S)) direction.z += -1;
+        if (Input.GetKey(KeyCode.S)) direction.y += -1;
         if (Input.GetKey(KeyCode.D)) direction.x += 1;
         return direction.normalized;
     }

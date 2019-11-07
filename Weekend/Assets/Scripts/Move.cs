@@ -15,9 +15,9 @@ public class Move : MonoBehaviour
         speed = 10;
     }
 
-    protected void move(Vector3 direction)
+    protected void move(Vector2 direction)
     {
-        transform.Translate(direction * Time.deltaTime * speed);
+        transform.Translate(new Vector3 (direction.x, 0, direction.y) * Time.deltaTime * speed);
     }
 
     protected void jump(Vector3 direction)

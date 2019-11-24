@@ -9,28 +9,22 @@ public class GunConteller : MonoBehaviour
     [SerializeField]
     private Gun currentGun;
 
-
     // 연사 속도 계산
     private float currentFireRate;
-
 
     // 상태 변수
     private bool isReload = false;
     [HideInInspector]
     public bool isFineSightMode = false;
 
-
     // 본래 포지션 값.
     private Vector3 originPos;
-
 
     // 효과음 재생
     private AudioSource audioSource;
 
-
     // 레이저 충돌 정보 받아옴.
     private RaycastHit hitInfo;
-
 
     // 필요한 컴포넌트
     [SerializeField]
@@ -115,16 +109,6 @@ public class GunConteller : MonoBehaviour
             Destroy(clone, 2f);
         }
     }
-
-    /*public void HitShoot()
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(hitInfo.transform.tag, hitInfo.transform.forward, out hit, range))
-        {
-            Instantiate(bulletHole, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-            Debug.Log(hit.transform.name + ", Damage : " + damage);
-        }
-    }*/
 
     // 재장전 시도
     private void TryReload()
@@ -217,14 +201,12 @@ public class GunConteller : MonoBehaviour
 
     }
 
-
     // 사운드 재생.
     private void PlaySE(AudioClip _clip)
     {
         audioSource.clip = _clip;
         audioSource.Play();
     }
-
     public Gun GetGun()
     {
         return currentGun;

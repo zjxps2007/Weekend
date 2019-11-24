@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GunConteller : MonoBehaviour
 {
+
     // 현재 장착된 총
     [SerializeField]
     private Gun currentGun;
@@ -29,6 +31,7 @@ public class GunConteller : MonoBehaviour
     // 필요한 컴포넌트
     [SerializeField]
     private Camera theCam;
+    private StatusController theStatusController;
 
 
     // 피격 이펙트.
@@ -39,6 +42,7 @@ public class GunConteller : MonoBehaviour
     {
         originPos = Vector3.zero;
         audioSource = GetComponent<AudioSource>();
+        theStatusController = FindObjectOfType<StatusController>();
     }
 
 
@@ -47,9 +51,7 @@ public class GunConteller : MonoBehaviour
         GunFireRateCalc();
         TryFire();
         TryReload();
-        //TryFineSight();
     }
-
 
     // 연사속도 재계산
     private void GunFireRateCalc()
@@ -61,10 +63,14 @@ public class GunConteller : MonoBehaviour
     // 발사 시도
     private void TryFire()
     {
-        if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
+        if ((Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer) && Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
         {
             Fire();
         }
+        /*if (Input.GetButton("Fire1") && currentFireRate <= 0 && !isReload)
+        {
+            Fire();
+        }*/
     }
 
 
@@ -104,6 +110,11 @@ public class GunConteller : MonoBehaviour
             if(hitInfo.transform.tag == "npc")
             {
                 hitInfo.transform.GetComponent<Dm>().Damage(currentGun.damage, transform.position);
+            }
+            else if (hitInfo.transform.tag == "Player")
+            {
+                hitInfo.transform.GetComponent<StatusController>().DecreaseHP(currentGun.damage);
+             
             }
             GameObject clone = Instantiate(hit_effect_prefab, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
             Destroy(clone, 2f);

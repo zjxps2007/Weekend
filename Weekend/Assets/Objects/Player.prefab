@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4882743827493122308}
   - component: {fileID: 4882743827493122309}
+  - component: {fileID: 1015155236247286107}
   - component: {fileID: 4882743827493122311}
   - component: {fileID: 4882743827493122314}
   - component: {fileID: 4299097611147322524}
@@ -133,6 +134,14 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!33 &1015155236247286107
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4882743827493122315}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &4882743827493122311
 Rigidbody:
   m_ObjectHideFlags: 0
